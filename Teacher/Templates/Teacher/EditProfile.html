@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" >
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txt_name" id="txt_name" value="{{sh.teacher_name}}"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="text" name="txt_email" id="txt_email" value="{{sh.teacher_email}}"></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="text" name="txt_contact" id="txt_contact" value="{{sh.teacher_contact}}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="btn_submit" id="btn_submit" value="Submit"></td>
+            </tr>
+        </table>
+        {% if msg %}
+        <script>
+            alert("{{msg}}")
+            window.location= "{% url 'Teacher:EditProfile' %}"
+        </script>
+        {% endif %}
+    </form>
+</body>
+</html>

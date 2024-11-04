@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Type</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Activity Name</td>
+                <td><input required type="text" name="txt_activity" id="txt_activity" placeholder="Enter Activity"></td>
+            </tr>
+            <tr>
+                <td>Activity Mark</td>
+                <td><input required type="text" name="txt_mark" id="txt_mark" placeholder="Enter Mark"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit" name="btn_submit" id="btn_submit"></td>
+            </tr>
+        </table>
+        <br>
+        <table border="2" align="center">
+            <tr>
+                <td>SL NO</td>
+                <td>Activity Type</td>
+                <td>Mark</td>
+                <td>Action</td>
+            </tr>
+            {% for i in act %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.activity_name}}</td>
+                <td>{{i.activity_mark}}</td>
+                <td><a href="{% url 'Admin:deleteact' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

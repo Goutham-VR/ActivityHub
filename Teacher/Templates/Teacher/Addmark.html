@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Point Verification</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <form action="" method="post">
+            <table border="3">
+                <tr>
+                    <td>SL NO</td>
+                    <td>Activity Name</td>
+                    <td>Activity Mark</td>
+                    <td>Action</td>
+                </tr>
+                {% for i in ptn %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.participation_activity.activity_name}}</td>
+                    <td>{% if i.participation_mark == "" %}
+                        N/A
+                        {% else %}
+                        {{i.participation_mark}}
+                        {% endif %}</td>
+                    <td><a href="{% url 'Teacher:mark' i.id %}">Add Mark</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </form>
+</body>
+</html>

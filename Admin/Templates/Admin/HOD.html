@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOD Registration</title>
+</head>
+<body>
+    <form method="post" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table align="center" border="">
+            <tr>
+                <td>Name</td>
+                <td><input required type="text" name="txt_name" id="txt_name" placeholder="Enter Name"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input required type="email" name="txt_email" id="txt_email" placeholder="Enter Email"></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input required type="text" name="txt_contact" id="txt_contact" placeholder="Enter Contact"></td>
+            </tr>
+            <tr>
+                <td>Photo</td>
+                <td><input type="file" name="txt_photo" id="txt_photo"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input required type="Password" name="txt_password" id="txt_password" placeholder="Enter Password"></td>
+            </tr>
+            <tr>
+                <td>Department</td>
+                <td><select name="sel_department" id="sel_department" required>
+                    <option value="">----Select Department----</option>
+                    {% for i in dep %}
+                    <option value="{{i.id}}">{{i.department_name}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" value="Submit" name="btn_submit" id="btn_submit"></td>
+            </tr>
+        </table>
+        <br>
+        <table align="center" border="1">
+            <tr>
+                <td>SL NO</td>
+                <td>Photo</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Contact</td>
+                <td>Department</td>
+                <td>Action</td>
+            </tr>
+                {% for i in HOD %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.hod_photo.url}}" alt="" width="150" height="150"></td>
+                <td>{{i.hod_name}}</td>
+                <td>{{i.hod_email}}</td>
+                <td>{{i.hod_contact}}</td>
+                <td>{{i.hod_department.department_name}}</td>
+                <td><a href="{% url 'Admin:deletehod' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

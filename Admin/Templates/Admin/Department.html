@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table align="center">
+            <tr>
+                <td>Department Name</td>
+                <td><input required type="text" name="txt_department" id="txt_department" placeholder="Enter Department"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input type="submit" name="btn_submit" id="btn_submit" value="Submit"></td>
+            </tr>
+        </table>
+        <br>
+        <table border="2" align="center">
+            <tr>
+                <td>SL NO</td>
+                <td>Department Name</td>
+                <td>Action</td>
+            </tr>
+            {% for i in dep %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.department_name}}</td>
+                <td><a href="{% url 'Admin:deletedep' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2 align="center">Unverified Mark</h2>
+        <table align="center">
+            <tr>
+                <td>SL NO</td>
+                <td>Activity Name</td>
+                <td>Student Name</td>
+                <td>Mark</td>
+                <td>Action</td>
+            </tr>
+            {% for j in un %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{j.participation_activity.activity_name}}</td>
+                <td>{{j.participation_student.student_name}}</td>
+                <td>{{j.participation_mark}}</td>
+                <td><a href="{% url 'HOD:VerifyMark' j.id %}">Verify</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <br>
+        <h2 align="center">Verified Mark</h2>
+        <table align="center"> 
+            <tr>
+                <td>SL NO</td>
+                <td>Activity Name</td>
+                <td>Student Name</td>
+                <td>Mark</td>
+                <td>Action</td>
+            </tr>
+            {% for i in ver %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.participation_activity.activity_name}}</td>
+                <td>{{i.participation_student.student_name}}</td>
+                <td>{{i.participation_mark}}</td>
+                <td><a href="{% url 'HOD:Unverifymark' i.id %}">Unverify</a>
+                    <a href="{% url 'HOD:Rejectmark' i.id %}">Reject</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </table>
+    <br>
+    <br>
+    <h2 align="center">Rejected Mark</h2>
+    <table align="center"> 
+        <tr>
+            <td>SL NO</td>
+            <td>Activity Name</td>
+            <td>Student Name</td>
+            <td>Mark</td>
+            <td>Action</td>
+        </tr>
+        {% for l in unv %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{l.participation_activity.activity_name}}</td>
+            <td>{{l.participation_student.student_name}}</td>
+            <td>{{l.participation_mark}}</td>
+            <td><a href="{% url 'HOD:Unverifymark' l.id %}">Unreject</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+</body>
+</html>
