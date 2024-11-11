@@ -1,9 +1,101 @@
+{% extends 'Teacher/header.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+                       table {
+            color: aliceblue;
+            border-radius: 10px;
+            background-color: dimgrey;
+            border: 1px solid transparent; /* Makes the outer border invisible */
+            border-collapse: separate;
+            border-spacing: 0; /* Removes spacing between cells */
+        }
+        
+        /* Remove outer border on top row */
+        tr:first-child td {
+            border-top: none;
+        }
+        
+        /* Remove outer border on bottom row */
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Remove outer border on left side */
+        tr td:first-child {
+            border-left: none;
+        }
+        
+        /* Remove outer border on right side */
+        tr td:last-child {
+            border-right: none;
+        }
+        
+        td {
+            border: 1px solid slategray; /* Adds inner borders only */
+            padding: 8px;
+        }
+        
+        .button-cell {
+            text-align: center; /* Centers content within the cell */
+        }
+        
+        .button {
+            background-color: rgb(98, 252, 42);
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 0 5px; /* Adds space between buttons */
+        }
+        .text {
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            width: 280px;
+            padding: 5px 15px;
+            font-size: 16px;
+            /* cursor: pointer; */
+            border-radius: 4px;
+            margin: 0 5px; /* Adds space between buttons */
+        }
+    
+    /* Hide the actual file input */
+    .file{
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            font-size: 16px;
+            width: 280px;
+            cursor:pointer;
+            border-radius: 4px;
+            margin: 0 5px;
+    }
+    .abutton {
+            background-color:cornflowerblue; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        b{
+            color:chartreuse;
+        }
+    </style>
 </head>
 <body>
     <form action="" method="post" enctype="multipart/form-data">
@@ -11,18 +103,18 @@
         <table align="center" >
             <tr>
                 <td>Name</td>
-                <td><input type="text" name="txt_name" id="txt_name" value="{{sh.teacher_name}}"></td>
+                <td><input class="text" type="text" name="txt_name" id="txt_name" value="{{sh.teacher_name}}"></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input type="text" name="txt_email" id="txt_email" value="{{sh.teacher_email}}"></td>
+                <td><input class="text" type="text" name="txt_email" id="txt_email" value="{{sh.teacher_email}}"></td>
             </tr>
             <tr>
                 <td>Contact</td>
-                <td><input type="text" name="txt_contact" id="txt_contact" value="{{sh.teacher_contact}}"></td>
+                <td><input class="text" type="text" name="txt_contact" id="txt_contact" value="{{sh.teacher_contact}}"></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" name="btn_submit" id="btn_submit" value="Submit"></td>
+                <td colspan="2" align="center"><input class="abutton" type="submit" name="btn_submit" id="btn_submit" value="Submit"></td>
             </tr>
         </table>
         {% if msg %}
@@ -34,3 +126,4 @@
     </form>
 </body>
 </html>
+{% endblock content %}

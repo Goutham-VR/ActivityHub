@@ -1,16 +1,64 @@
+{% extends 'HOD/header.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile</title>
+    <style>
+        table{
+            color:aliceblue;
+            border-radius: 10px;
+            background-color:dimgrey;
+            border-color:slategray;
+            border-collapse: collapse; /* Collapses borders to avoid outer table border */
+        }
+        .button {
+            background-color:cornflowerblue; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        b{
+            color:chartreuse;
+        }
 
+        td {
+            /* border: 1px solid black; Adds inner borders only */
+            padding: 8px; /* Optional padding for cells */
+        }
+        .image{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .profile-frame {
+            width: 400px; /* Set desired square frame size */
+            height: 400px;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            border-radius: 250px;
+        }
+
+    </style>
 </head>
 <body>
     <form action="" method="post" >
-        <table border="2" align="center">
+        <table align="center" width="350">
             <tr>
-                <td colspan="2"><img src="{{sh.hod_photo.url}}" alt="" width="250" height="250"></td>
+                <td colspan="2"><div class="profile-frame"><img src="{{sh.hod_photo.url}}" alt="" class="image"></div></td>
             </tr>
             <tr>
                 <td>Name</td>
@@ -24,15 +72,16 @@
                 <td>Contact</td>
                 <td>{{sh.hod_contact}}</td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <td>Address</td>
                 <td>{{sh.hod_address}}</td>
-            </tr>
+            </tr> -->
             <tr>
-                <td colspan="2" align="center"><a href="{% url 'HOD:EditProfile' %}">Edit Profile</a>
-                                               <a href="{% url 'HOD:ChangePassword' %}" >Change Password</a></td>
+                <td colspan="2" align="center"><a class="button" href="{% url 'HOD:EditProfile' %}">Edit Profile</a>
+                                               <a class="button" href="{% url 'HOD:ChangePassword' %}" >Change Password</a></td>
             </tr>
         </table>
     </form>
 </body>
 </html>
+{% endblock content %}

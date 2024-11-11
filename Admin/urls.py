@@ -4,7 +4,8 @@ app_name="Admin"
 urlpatterns = [
     path('Admin/',views.Admin,name="Admin"),
     path('deleteadmin/<int:id>',views.deleteadmin,name="deleteadmin"),
-    
+
+    path('Homepage/',views.Homepage,name="Homepage"),
 
     path('HOD/',views.HOD,name="HOD"),
     path('deletehod/<int:id>',views.deletehod,name="deletehod"),

@@ -1,9 +1,85 @@
+{% extends 'HOD/header.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Registration</title>
+    <style>
+        table {
+        color: aliceblue;
+        border-radius: 10px;
+        background-color: dimgrey;
+        border: 1px solid transparent; /* Makes the outer border invisible */
+        border-collapse: separate;
+        border-spacing: 0; /* Removes spacing between cells */
+    }
+    
+    /* Remove outer border on top row */
+    tr:first-child td {
+        border-top: none;
+    }
+    
+    /* Remove outer border on bottom row */
+    tr:last-child td {
+        border-bottom: none;
+    }
+    
+    /* Remove outer border on left side */
+    tr td:first-child {
+        border-left: none;
+    }
+    
+    /* Remove outer border on right side */
+    tr td:last-child {
+        border-right: none;
+    }
+    
+    td {
+        border: 1px solid slategray; /* Adds inner borders only */
+        padding: 8px;
+    }
+    
+    .button-cell {
+        text-align: center; /* Centers content within the cell */
+    }
+    
+    .button {
+        background-color: rgb(98, 252, 42);
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+    .text {
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        width: 280px;
+        padding: 5px 15px;
+        font-size: 16px;
+        /* cursor: pointer; */
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+
+/* Hide the actual file input */
+.file{
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        font-size: 16px;
+        width: 280px;
+        cursor:pointer;
+        border-radius: 4px;
+        margin: 0 5px;
+}
+    </style>
 </head>
 <body>
     <form action="" method="post" enctype="multipart/form-data">
@@ -13,26 +89,26 @@
          <table align="center" border="2">
             <tr>
                 <td>Name</td>
-                <td><input required type="text" name="txt_name" id="txt_name" placeholder="Enter Name"></td>
+                <td><input class="text" required type="text" name="txt_name" id="txt_name" placeholder="Enter Name"></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input required type="email" name="txt_email" id="txt_email" placeholder="Enter Email"></td>
+                <td><input class="text" required type="email" name="txt_email" id="txt_email" placeholder="Enter Email"></td>
             </tr>
             <tr>
                 <td>Contact</td>
-                <td><input required type="text" name="txt_contact" id="txt_contact" placeholder="Enter Contact"></td>
+                <td><input class="text" required type="text" name="txt_contact" id="txt_contact" placeholder="Enter Contact"></td>
             </tr>
             <tr>
                 <td>Photo</td>
-                <td><input type="file" name="txt_photo" id="txt_photo"></td>
+                <td><input type="file" name="txt_photo" id="txt_photo" class="file"></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input required type="password" name="txt_password" id="txt_password" placeholder="Enter Password"></td>
+                <td><input class="text" required type="password" name="txt_password" id="txt_password" placeholder="Enter Password"></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" value="Submit" name="btn_submit" id="btn_submit"></td>
+                <td colspan="2" align="center"><input class="button" type="submit" value="Submit" name="btn_submit" id="btn_submit"></td>
             </tr>
          </table>
          <br>
@@ -53,10 +129,11 @@
                 <td>{{i.teacher_email}}</td>
                 <td>{{i.teacher_contact}}</td>
                 <td><img src="{{i.teacher_photo.url}}" alt="" width="150" height="150">
-                <td><a href="{% url 'HOD:deleteteacher' i.id %}">Delete</a></td>
+                <td><a class="button" href="{% url 'HOD:deleteteacher' i.id %}">Delete</a></td>
             </tr>
             {% endfor %}
          </table>
     </form>
 </body>
 </html>
+{% endblock content %}

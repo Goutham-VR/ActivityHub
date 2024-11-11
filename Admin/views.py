@@ -18,6 +18,10 @@ def deleteadmin(request, id):
     tbl_admin.objects.get(id=id).delete()
     return redirect("Admin:Admin")
 
+#homepage
+def Homepage(request):
+    return render(request,'Admin/Homepage.html')
+
 #HOD BLOCK----------------------------------------------------------------------------------------#
 #Insert Select
 def HOD(request):

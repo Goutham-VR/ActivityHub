@@ -10,4 +10,6 @@ urlpatterns = [
     path('ChangePassword/',views.ChangePassword, name='ChangePassword'),
     path('Addmark/',views.addmark, name='Addmark'),
     path('mark/<int:id>',views.mark, name='mark'),
+    path('AjaxDepartment/',views.AjaxDepartment, name='AjaxDepartment'),
+    path('Logout/',views.Logout, name='Logout'),
 ]

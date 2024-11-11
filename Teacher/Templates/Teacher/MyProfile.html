@@ -1,16 +1,124 @@
+{% extends 'Teacher/header.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile</title>
-
+    <style>
+        table {
+            color: aliceblue;
+            border-radius: 10px;
+            background-color: dimgrey;
+            border: 1px solid transparent; /* Makes the outer border invisible */
+            border-collapse: separate;
+            border-spacing: 0; /* Removes spacing between cells */
+        }
+        
+        /* Remove outer border on top row */
+        tr:first-child td {
+            border-top: none;
+        }
+        
+        /* Remove outer border on bottom row */
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Remove outer border on left side */
+        tr td:first-child {
+            border-left: none;
+        }
+        
+        /* Remove outer border on right side */
+        tr td:last-child {
+            border-right: none;
+        }
+        
+        td {
+            border: 1px solid slategray; /* Adds inner borders only */
+            padding: 8px;
+        }
+        
+        .button-cell {
+            text-align: center; /* Centers content within the cell */
+        }
+        
+        .button {
+            background-color: rgb(98, 252, 42);
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin: 0 5px; /* Adds space between buttons */
+        }
+        .text {
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            width: 280px;
+            padding: 5px 15px;
+            font-size: 16px;
+            /* cursor: pointer; */
+            border-radius: 4px;
+            margin: 0 5px; /* Adds space between buttons */
+        }
+    
+    /* Hide the actual file input */
+    .file{
+            background-color: cornflowerblue;
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            font-size: 16px;
+            width: 280px;
+            cursor:pointer;
+            border-radius: 4px;
+            margin: 0 5px;
+    }
+    .abutton {
+            background-color:cornflowerblue; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        b{
+            color:chartreuse;
+        }
+        .image{
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .profile-frame {
+            width: 400px; /* Set desired square frame size */
+            height: 400px;
+            overflow: hidden;
+            display: inline-block;
+            position: relative;
+            border-radius: 250px;
+        }
+        </style>
 </head>
 <body>
     <form action="" method="post" >
-        <table border="2" align="center">
+        {% csrf_token %}
+        <table align="center">
             <tr>
-                <td colspan="2"><img src="{{sh.teacher_photo.url}}" alt="" width="250" height="250"></td>
+                <td colspan="2" align="center"><div class="profile-frame"><img src="{{sh.teacher_photo.url}}" alt="" class="image"></div></td>
             </tr>
             <tr>
                 <td>Name</td>
@@ -25,14 +133,11 @@
                 <td>{{sh.teacher_contact}}</td>
             </tr>
             <tr>
-                <td>Address</td>
-                <td>{{sh.teacher_address}}</td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><a href="{% url 'Teacher:EditProfile' %}">Edit Profile</a>
-                                               <a href="{% url 'Teacher:ChangePassword' %}" >Change Password</a></td>
+                <td colspan="2" align="center"><a class="abutton" href="{% url 'Teacher:EditProfile' %}">Edit Profile</a>
+                                               <a class="abutton" href="{% url 'Teacher:ChangePassword' %}" >Change Password</a></td>
             </tr>
         </table>
     </form>
 </body>
 </html>
+{% endblock content %}

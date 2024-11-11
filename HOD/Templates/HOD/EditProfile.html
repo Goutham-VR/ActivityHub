@@ -1,9 +1,72 @@
+{% extends 'HOD/header.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Profile</title>
+    <style>
+        table {
+        color: aliceblue;
+        border-radius: 10px;
+        background-color: dimgrey;
+        border: 1px solid transparent; /* Makes the outer border invisible */
+        border-collapse: separate;
+        border-spacing: 0; /* Removes spacing between cells */
+    }
+    
+    /* Remove outer border on top row */
+    tr:first-child td {
+        border-top: none;
+    }
+    
+    /* Remove outer border on bottom row */
+    tr:last-child td {
+        border-bottom: none;
+    }
+    
+    /* Remove outer border on left side */
+    tr td:first-child {
+        border-left: none;
+    }
+    
+    /* Remove outer border on right side */
+    tr td:last-child {
+        border-right: none;
+    }
+    
+    td {
+        border: 1px solid slategray; /* Adds inner borders only */
+        padding: 8px;
+    }
+    
+    .button-cell {
+        text-align: center; /* Centers content within the cell */
+    }
+    
+    .button {
+        background-color: rgb(98, 252, 42);
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+    .text {
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        font-size: 16px;
+        /* cursor: pointer; */
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+    </style>    
+    
 </head>
 <body>
     <form action="" method="post" enctype="multipart/form-data">
@@ -11,24 +74,25 @@
         <table align="center" >
             <tr>
                 <td>Name</td>
-                <td><input type="text" name="txt_name" id="txt_name" value="{{hod.hod_name}}"></td>
+                <td><input class="text" type="text" name="txt_name" id="txt_name" value="{{hod.hod_name}}"></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input type="text" name="txt_email" id="txt_email" value="{{hod.hod_email}}"></td>
+                <td><input class="text" type="text" name="txt_email" id="txt_email" value="{{hod.hod_email}}"></td>
             </tr>
             <tr>
                 <td>Contact</td>
-                <td><input type="text" name="txt_contact" id="txt_contact" value="{{hod.hod_contact}}"></td>
+                <td><input class="text" type="text" name="txt_contact" id="txt_contact" value="{{hod.hod_contact}}"></td>
             </tr>
             <!-- <tr>
                 <td>Address</td>
                 <td><textarea name="txt_address" id="txt_address">{{hod.hod_address}}</textarea></td>
             </tr> -->
             <tr>
-                <td colspan="2" align="center"><input type="submit" name="btn_submit" id="btn_submit" value="Submit"></td>
+                <td colspan="2" align="center"><input class="button" type="submit" name="btn_submit" id="btn_submit" value="Submit"></td>
             </tr>
         </table>
     </form>
 </body>
 </html>
+{% endblock content %}

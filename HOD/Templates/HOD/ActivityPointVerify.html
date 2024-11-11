@@ -1,76 +1,107 @@
+{% extends 'HOD/header.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verification</title>
+    <style>
+        table{
+            color:aliceblue;
+            background-color:dimgrey;
+            border-color:darkslategrey;
+        }
+.button {
+            background-color:cornflowerblue; /* Green */
+            border: none;
+            color: white;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        b{
+            color:chartreuse;
+        }
+    </style>
 </head>
 <body>
     <form action="" method="post">
         {% csrf_token %}
-        <h2 align="center">Unverified Mark</h2>
-        <table align="center">
+        <table align="center" border="1" width="1000px">
             <tr>
-                <td>SL NO</td>
-                <td>Activity Name</td>
-                <td>Student Name</td>
-                <td>Mark</td>
-                <td>Action</td>
+                <td colspan="5" align="center"><h2>UNVERIFIED MARK</h2></td>
+            </tr>
+            <tr>
+                <td align="center" width="80"><b>SL NO</b></td>
+                <td align="center"><B>Activity Name</B></td>
+                <td align="center"><B>Student Name</B></td>
+                <td align="center"><B>Mark</B></td>
+                <td align="center" width="200"><B>Action</B></td>
             </tr>
             {% for j in un %}
             <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{j.participation_activity.activity_name}}</td>
-                <td>{{j.participation_student.student_name}}</td>
-                <td>{{j.participation_mark}}</td>
-                <td><a href="{% url 'HOD:VerifyMark' j.id %}">Verify</a></td>
+                <td align="center">{{forloop.counter}}</td>
+                <td align="center">{{j.participation_activity.activity_name}}</td>
+                <td align="center">{{j.participation_student.student_name}}</td>
+                <td align="center">{{j.participation_mark}}</td>
+                <td align="center"><a class="button" href="{% url 'HOD:VerifyMark' j.id %}">Verify</a></td>
             </tr>
             {% endfor %}
         </table>
         <br>
         <br>
-        <h2 align="center">Verified Mark</h2>
-        <table align="center"> 
+        <table align="center" border="1" width="1000px">
             <tr>
-                <td>SL NO</td>
-                <td>Activity Name</td>
-                <td>Student Name</td>
-                <td>Mark</td>
-                <td>Action</td>
+                <td colspan="5" align="center"><h2>VERIFIED MARK</h2></td>
+            </tr>
+            <tr>
+                <td align="center" width="80"><b>SL NO</b></td>
+                <td align="center"><B>Activity Name</B></td>
+                <td align="center"><B>Student Name</B></td>
+                <td align="center"><B>Mark</B></td>
+                <td align="center" width="200"><B>Action</B></td>
             </tr>
             {% for i in ver %}
             <tr>
-                <td>{{forloop.counter}}</td>
-                <td>{{i.participation_activity.activity_name}}</td>
-                <td>{{i.participation_student.student_name}}</td>
-                <td>{{i.participation_mark}}</td>
-                <td><a href="{% url 'HOD:Unverifymark' i.id %}">Unverify</a>
-                    <a href="{% url 'HOD:Rejectmark' i.id %}">Reject</a></td>
+                <td align="center">{{forloop.counter}}</td>
+                <td align="center">{{i.participation_activity.activity_name}}</td>
+                <td align="center">{{i.participation_student.student_name}}</td>
+                <td align="center">{{i.participation_mark}}</td>
+                <td align="center"><a class="button" href="{% url 'HOD:Unverifymark' i.id %}">Unverify</a>
+                    <a class="button" href="{% url 'HOD:Rejectmark' i.id %}">Reject</a></td>
             </tr>
             {% endfor %}
         </table>
-    </table>
     <br>
     <br>
-    <h2 align="center">Rejected Mark</h2>
-    <table align="center"> 
+    <table align="center" border="1" width="1000px">
         <tr>
-            <td>SL NO</td>
-            <td>Activity Name</td>
-            <td>Student Name</td>
-            <td>Mark</td>
-            <td>Action</td>
+            <td colspan="5" align="center"><h2>REJECTED MARK</h2></td>
+        </tr>
+        <tr>
+            <td align="center" width="80"><b>SL NO</b></td>
+                <td align="center"><B>Activity Name</B></td>
+                <td align="center"><B>Student Name</B></td>
+                <td align="center"><B>Mark</B></td>
+                <td align="center" width="200"><B>Action</B></td>
         </tr>
         {% for l in unv %}
         <tr>
-            <td>{{forloop.counter}}</td>
-            <td>{{l.participation_activity.activity_name}}</td>
-            <td>{{l.participation_student.student_name}}</td>
-            <td>{{l.participation_mark}}</td>
-            <td><a href="{% url 'HOD:Unverifymark' l.id %}">Unreject</a></td>
+            <td align="center">{{forloop.counter}}</td>
+            <td align="center">{{l.participation_activity.activity_name}}</td>
+            <td align="center">{{l.participation_student.student_name}}</td>
+            <td align="center">{{l.participation_mark}}</td>
+            <td align="center"><a class="button" href="{% url 'HOD:Unverifymark' l.id %}">Unreject</a></td>
         </tr>
         {% endfor %}
     </table>
     </form>
 </body>
 </html>
+{% endblock content %}

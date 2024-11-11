@@ -16,4 +16,6 @@ urlpatterns = [
     path('TeacherReg/',views.TeacherReg,name="TeacherReg"),
     path('deleteteacher/<int:id>',views.deleteteacher,name="deleteteacher"),
 
+    path('Logout/',views.Logout,name="Logout"),
+
 ]

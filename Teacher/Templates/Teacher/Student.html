@@ -1,42 +1,123 @@
+{% extends 'Teacher/header.html' %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+
+        table {
+        color: aliceblue;
+        border-radius: 10px;
+        background-color: dimgrey;
+        border: 1px solid transparent; /* Makes the outer border invisible */
+        border-collapse: separate;
+        border-spacing: 0; /* Removes spacing between cells */
+    }
+    
+    /* Remove outer border on top row */
+    tr:first-child td {
+        border-top: none;
+    }
+    
+    /* Remove outer border on bottom row */
+    tr:last-child td {
+        border-bottom: none;
+    }
+    
+    /* Remove outer border on left side */
+    tr td:first-child {
+        border-left: none;
+    }
+    
+    /* Remove outer border on right side */
+    tr td:last-child {
+        border-right: none;
+    }
+    
+    td {
+        border: 1px solid slategray; /* Adds inner borders only */
+        padding: 10px;
+    }
+    
+    .button-cell {
+        text-align: center; /* Centers content within the cell */
+    }
+    
+    .button {
+        background-color: rgb(98, 252, 42);
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+    .text {
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        width: 280px;
+        padding: 5px 15px;
+        font-size: 16px;
+        /* cursor: pointer; */
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+
+    .select {
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        width: 280px;
+        padding: 5px 15px;
+        font-size: 16px;
+        /* cursor: pointer; */
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+
+/* Hide the actual file input */
+.file{
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        font-size: 16px;
+        width: 280px;
+        cursor:pointer;
+        border-radius: 4px;
+        margin: 0 5px;
+}
+
+    </style>
 </head>
 <body>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data" align="center">
         {% csrf_token %}
-        <table border="2">
+        <table border="2" align="center">
             <tr>
                 <td>Name</td>
-                <td><input type="text" name="txt_name" id="txt_name"></td>
+                <td><input class="text" type="text" name="txt_name" id="txt_name"></td>
             </tr>
             <tr>
                 <td>Email</td>
-                <td><input type="text" name="txt_email" id="txt_email"></td>
+                <td><input class="text" type="text" name="txt_email" id="txt_email"></td>
             </tr>
             <tr>
                 <td>Contact</td>
-                <td><input type="text" name="txt_contact" id="txt_contact"></td>
+                <td><input class="text" type="text" name="txt_contact" id="txt_contact"></td>
             </tr>
             <tr>
                 <td>Address</td>
-                <td><input type="text" name="txt_address" id="txt_address"></td>
-            </tr>
-            <tr>
-                <td>Course</td>
-                <td><select name="sel_course" id="sel_course">
-                    <option>Select Course</option>
-                    {% for i in course %}
-                    <option value="{{i.id}}">{{i.course_name}}</option>
-                    {% endfor %}
-                </select></td>
+                <td><input class="text" type="text" name="txt_address" id="txt_address"></td>
             </tr>
             <tr>
                 <td>Department</td>
-                <td><select name="sel_department" id="sel_department">
+                <td><select class="select" name="sel_department" id="sel_department">
                     <option>Select Department</option>
                     {% for i in dep %}
                     <option value="{{i.id}}">{{i.department_name}}</option>
@@ -44,21 +125,42 @@
                 </select></td>
             </tr>
             <tr>
+                <td>Course</td>
+                <td><select class="select" name="sel_course" id="sel_course">
+                    <option>Select Course</option>
+                </select></td>
+            </tr>
+            <tr>
                 <td>Photo</td>
-                <td><input type="file" name="txt_photo" id="txt_photo"></td>
+                <td><input class="file" type="file" name="txt_photo" id="txt_photo"></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="txt_password" id="txt_password"></td>
+                <td><input class="text" type="password" name="txt_password" id="txt_password"></td>
             </tr>
             <tr>
                 <td>Confirm Password</td>
-                <td><input type="password" name="txt_cpass" id="txt_cpass"></td>
+                <td><input class="text" type="password" name="txt_cpass" id="txt_cpass"></td>
             </tr>
             <tr>
-                <td colspan="2" align="center"><input type="submit" name="btn_submit" id="btn_submit" value="Submit"><input type="reset" name="btn_cancel" id="btn_cancel" value="Cancel"></td>
+                <td colspan="2" align="center"><input class="button" type="submit" name="btn_submit" id="btn_submit" value="Submit"><input class="button" type="reset" name="btn_cancel" id="btn_cancel" value="Cancel"></td>
             </tr>
         </table>
     </form>
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $("#sel_department").change(function () {
+        var deptid = $(this).val();
+        var ur = "{% url 'Teacher:AjaxDepartment' %}"
+        $.ajax({
+            url: ur,
+            data: { deptid: deptid, },
+            success: function (data) {
+                $("#sel_course").html(data);
+            },
+        });
+    });
+</script>
+{% endblock content %}

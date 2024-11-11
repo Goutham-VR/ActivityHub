@@ -242,14 +242,13 @@ a:hover {
 </head>
 <body>
     <div class="wrap">
-  
         <div class="flip-container" id='flippr'>
           <div class="flipper">
             <div class="front"></div>
             <div class="back"></div>
           </div>
         </div>
-        <h1 class="text" id="welcome">Welcome. <span>please login.</span></h1>
+        <h1 class="text" id="welcome">Welcome. <span>please Register.</span></h1>
         
         <form method='post' id="theForm" enctype="multipart/form-data">
             {% csrf_token %}
@@ -258,7 +257,7 @@ a:hover {
           <input type="text" name="txt_contact" id="txt_contact" placeholder='Contact'>
           <input type="text" name="txt_address" id="txt_address" placeholder='Address'>
           <div class="select-wrapper"><select name="sel_course" id="sel_course" >
-            <option>Select Course</option>
+            <option value="">Select Course</option>
             {% for i in course %}
             <option value="{{i.id}}">{{i.course_name}}</option>
             {% endfor %}
@@ -273,7 +272,7 @@ a:hover {
             
           <div class='login'>
             <a href="#"><i class="icon-cog"></i> I've fogotten my password</a>
-            <input type='submit' name="btn_submit" id="btn_submit" value='Login'>
+            <input type="submit" name="btn_submit" id="btn_submit" value="SUBMIT">
           </div><!-- /login -->
         </form>
       </div><!-- /wrap -->
@@ -325,30 +324,22 @@ a:hover {
     </form> -->
 </body>
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-  $("#theForm").on("submit", function (event) {
-    var name = $("#username").val(),
-        auth = $('#password').val() === 'password' && name === 'jennifer',
-        msgBox = $("#welcome"),
-        origMsg = msgBox.html(),
-        newMsg = 'Welcome. <span>' + name +'.' +'</span>',
-        message = name !== '' && auth ? newMsg : origMsg;
-  
-    msgBox.html(message);
-    if (auth) {
-      $('#flippr .flipper').addClass('logged-in');
-    }
-  
-    event.preventDefault();
-  });
-  
-});
-document.getElementById('txt_photo').addEventListener('change', function()
-{
-    const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
-    document.getElementById('file-name').textContent = fileName;
-});
+        // Handle file input display
+        document.getElementById('txt_photo').addEventListener('change', function () {
+            const fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        // Submit form without additional login checks
+        $("#theForm").on("submit", function (event) {
+            // Additional client-side validation can be added here if needed
+            
+            // Form will submit as expected
+        });
+    });
 
 /* 
 var app = {

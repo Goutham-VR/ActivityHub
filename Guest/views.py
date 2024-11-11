@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from Guest.models import *
-from Admin.models import tbl_hod
+from Admin.models import tbl_hod,tbl_admin
 from Admin.models import tbl_course
 from HOD.models import tbl_teacher
 from Teacher.models import tbl_student
@@ -14,6 +14,7 @@ def login(request):
     if request.method=="POST":
         email=request.POST.get('txt_email')
         password=request.POST.get('txt_password')
+        admincount = tbl_admin.objects.filter(admin_email=email,admin_password=password).count()
         hodcount = tbl_hod.objects.filter(hod_email=email,hod_password=password).count()
         teachercount = tbl_teacher.objects.filter(teacher_email=email,teacher_password=password).count()
         studentcount = tbl_student.objects.filter(student_email=email,student_password=password).count()
@@ -32,6 +33,11 @@ def login(request):
             request.session['sid'] = student.id
             print(student.id)
             return redirect("Student:Homepage")
+        elif admincount > 0:
+            admin=tbl_admin.objects.get(admin_email=email, admin_password=password)
+            request.session['aid'] = admin.id
+            print(admin.id)
+            return redirect("Admin:Homepage")
         else:
             return render(request, 'Guest/Login.html', {"msg":"invalid Data"})
     else:
